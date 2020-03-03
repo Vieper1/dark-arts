@@ -7,8 +7,9 @@ public class Block : MonoBehaviour
 {
 	[Header("Config")]
 	public bool UseExitForce;
+	public float ExitForce = 0.0f;
 
-	public static float ExitForceMultiplier = 0.65f;
+	public static float DefaultExitForceMultiplier = 0.65f;
 
 	private bool isLit;
 	private BoxCollider myCollider;
@@ -39,6 +40,11 @@ public class Block : MonoBehaviour
 		Rigidbody rbOther = other.transform.GetComponent<Rigidbody>();
 		PlayerController ball = other.transform.GetComponent<PlayerController>();
 		if (UseExitForce)
-			rbOther.AddForce(ball.FakeVelocity.normalized * ExitForceMultiplier, ForceMode.Impulse);
+		{
+			if (ExitForce > 0.1f)
+				rbOther.AddForce(ball.FakeVelocity.normalized * ExitForce, ForceMode.Impulse);
+			else
+				rbOther.AddForce(ball.FakeVelocity.normalized * DefaultExitForceMultiplier, ForceMode.Impulse);
+		}
 	}
 }
