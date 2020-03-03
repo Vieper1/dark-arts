@@ -58,6 +58,7 @@ MonoBehaviour:
   FloorCheckSeparation: 0.4
   FloorCheckMinSpeed: 6
   CameraVerticalOffset: 1
+  FakeVelocity: {x: 0, y: 0, z: 0}
 --- !u!114 &4675692084929590530
 MonoBehaviour:
   m_ObjectHideFlags: 0

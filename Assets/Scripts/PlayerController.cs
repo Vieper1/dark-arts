@@ -41,10 +41,12 @@ public class PlayerController : MonoBehaviour
 		// Buttons to ball control
 		if (Input.GetKey(KeyCode.A)) {
 			rigidbody.AddForceAtPosition(Vector3.left * ForceMultiplier, Vector3.up * ForceOffset);
+			rigidbody.AddTorque(Vector3.forward * 100.0f * ForceMultiplier, ForceMode.Impulse);
 		}
 
 		if (Input.GetKey(KeyCode.D)) {
 			rigidbody.AddForceAtPosition(Vector3.right * ForceMultiplier, Vector3.up * ForceOffset);
+			rigidbody.AddTorque(Vector3.back * 100.0f * ForceMultiplier, ForceMode.Impulse);
 		}
 
 		FloorCheck();

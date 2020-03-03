@@ -6520,10 +6520,47 @@ PrefabInstance:
       propertyPath: m_Pivot.y
       value: 0.5
       objectReference: {fileID: 0}
+    - target: {fileID: 6338386108951010919, guid: e0c99a97c7734f042899e2980c25e257,
+        type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 3922441826958829417, guid: a961248b28ebc714fba1d6b943dca397,
+        type: 2}
     - target: {fileID: 6338386108951010920, guid: e0c99a97c7734f042899e2980c25e257,
         type: 3}
       propertyPath: m_Mesh
       value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 6338386108951010922, guid: e0c99a97c7734f042899e2980c25e257,
+        type: 3}
+      propertyPath: m_text
+      value: Show em' the curve!
+      objectReference: {fileID: 0}
+    - target: {fileID: 6338386108951010922, guid: e0c99a97c7734f042899e2980c25e257,
+        type: 3}
+      propertyPath: m_sharedMaterial
+      value: 
+      objectReference: {fileID: 3922441826958829417, guid: a961248b28ebc714fba1d6b943dca397,
+        type: 2}
+    - target: {fileID: 6338386108951010922, guid: e0c99a97c7734f042899e2980c25e257,
+        type: 3}
+      propertyPath: m_hasFontAssetChanged
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6338386108951010922, guid: e0c99a97c7734f042899e2980c25e257,
+        type: 3}
+      propertyPath: m_textInfo.characterCount
+      value: 19
+      objectReference: {fileID: 0}
+    - target: {fileID: 6338386108951010922, guid: e0c99a97c7734f042899e2980c25e257,
+        type: 3}
+      propertyPath: m_textInfo.spaceCount
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 6338386108951010922, guid: e0c99a97c7734f042899e2980c25e257,
+        type: 3}
+      propertyPath: m_textInfo.wordCount
+      value: 4
       objectReference: {fileID: 0}
     - target: {fileID: 6338386108951010923, guid: e0c99a97c7734f042899e2980c25e257,
         type: 3}
