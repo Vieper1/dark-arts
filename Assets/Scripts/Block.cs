@@ -1,9 +1,13 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
+using UnityEditor.PackageManager;
 using UnityEngine;
 
 public class Block : MonoBehaviour
 {
+	[Header("Config")]
+	public bool UseExitForce;
+
 	public static float ExitForceMultiplier = 0.65f;
 
 	private bool isLit;
@@ -34,6 +38,7 @@ public class Block : MonoBehaviour
 	{
 		Rigidbody rbOther = other.transform.GetComponent<Rigidbody>();
 		PlayerController ball = other.transform.GetComponent<PlayerController>();
-		rbOther.AddForce(ball.FakeVelocity.normalized * ExitForceMultiplier, ForceMode.Impulse);
+		if (UseExitForce)
+			rbOther.AddForce(ball.FakeVelocity.normalized * ExitForceMultiplier, ForceMode.Impulse);
 	}
 }
