@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.PlayerLoop;
 
 public class PlayerController : MonoBehaviour
 {
@@ -17,17 +18,26 @@ public class PlayerController : MonoBehaviour
 	public float FloorCheckMinSpeed;
 	public float CameraVerticalOffset;
 
+	[Header("Player")]
+	public Vector3 FakeVelocity;
+
 	private Rigidbody rigidbody;
 	private Camera mainCamera;
+	private Vector3 lastPosition;
 
 	void Start()
 	{
 		rigidbody = GetComponent<Rigidbody>();
 		mainCamera = Camera.main;
+		lastPosition = transform.position;
 	}
 
 	void Update()
     {
+		// Fake velocity
+		FakeVelocity = (transform.position - lastPosition) * Time.deltaTime;
+		lastPosition = transform.position;
+
 		// Buttons to ball control
 		if (Input.GetKey(KeyCode.A)) {
 			rigidbody.AddForceAtPosition(Vector3.left * ForceMultiplier, Vector3.up * ForceOffset);

@@ -4,6 +4,8 @@ using UnityEngine;
 
 public class Block : MonoBehaviour
 {
+	public static float ExitForceMultiplier = 0.65f;
+
 	private bool isLit;
 	private BoxCollider myCollider;
 
@@ -21,8 +23,17 @@ public class Block : MonoBehaviour
 		}
     }
 
-	public void SetLit(bool value)
+    public void SetLit(bool value)
 	{
 		isLit = value;
+	}
+
+
+	// Boost when exiting collider
+	void OnCollisionExit(Collision other)
+	{
+		Rigidbody rbOther = other.transform.GetComponent<Rigidbody>();
+		PlayerController ball = other.transform.GetComponent<PlayerController>();
+		rbOther.AddForce(ball.FakeVelocity.normalized * ExitForceMultiplier, ForceMode.Impulse);
 	}
 }

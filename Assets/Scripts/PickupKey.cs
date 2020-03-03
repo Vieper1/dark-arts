@@ -4,9 +4,6 @@ using UnityEngine.SceneManagement;
 
 public class PickupKey : MonoBehaviour
 {
-	public Vector3 TargetScale;
-
-
 	private float time = 0f;
 	private Vector3 InitialPosition;
 	private float FloatSpeed = 8.0f;
@@ -26,6 +23,8 @@ public class PickupKey : MonoBehaviour
 		transform.position = new Vector3(InitialPosition.x, InitialPosition.y + Mathf.Sin(time * FloatSpeed) * FloatAmplitude , InitialPosition.z);
 	}
 
+
+	// Pickup
 	private void OnTriggerEnter(Collider other)
 	{
 		string[] sceneNameSplit = SceneManager.GetActiveScene().name.Split('-');
