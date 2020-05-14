@@ -50,6 +50,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   AirControl: 0
+  DisableMovement: 0
   SpotLight: {fileID: 4675692084957007565}
   BallMaxRPM: 20
   ForceMultiplier: 5

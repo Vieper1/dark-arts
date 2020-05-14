@@ -7,6 +7,7 @@ public class PlayerController : MonoBehaviour
 {
     [Header("Mode")]
     public bool AirControl;
+    public bool DisableMovement;
 
 	[Header("Subobject")]
 	public GameObject SpotLight;
@@ -46,12 +47,24 @@ public class PlayerController : MonoBehaviour
         FakeVelocity = (transform.position - lastPosition) * Time.deltaTime;
 		lastPosition = transform.position;
 
-		
+
+        // SPOTLIGHT CONTROL
+        Vector3 diff = Camera.main.ScreenToWorldPoint(Input.mousePosition) - transform.position;
+        diff.z = 0;
+        diff.Normalize();
+        Quaternion quat = Quaternion.LookRotation(diff, Vector3.up);
+        SpotLight.transform.rotation = quat;
+
+
+
+        if (DisableMovement) return;
+
+
         
-        
-        // Buttons to ball control
+
+
         // MOVE LEFT
-		if (Input.GetKey(KeyCode.A)) {
+        if (Input.GetKey(KeyCode.A)) {
             if (isGrounded)
                 rb.AddForceAtPosition(Vector3.left * ForceMultiplier, transform.position + Vector3.up * ForceOffset);
             else
@@ -72,13 +85,6 @@ public class PlayerController : MonoBehaviour
         if (isGrounded && Input.GetKeyDown(KeyCode.Space)) {
 			rb.AddForce(Vector3.up * JumpForce, ForceMode.Impulse);
 		}
-        
-		// SPOTLIGHT CONTROL
-		Vector3 diff = Camera.main.ScreenToWorldPoint(Input.mousePosition) - transform.position;
-		diff.z = 0;
-		diff.Normalize();
-		Quaternion quat = Quaternion.LookRotation(diff, Vector3.up);
-		SpotLight.transform.rotation = quat;
 	}
 
 
