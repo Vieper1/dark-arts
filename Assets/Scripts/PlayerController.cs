@@ -5,6 +5,9 @@ using UnityEngine.PlayerLoop;
 
 public class PlayerController : MonoBehaviour
 {
+    [Header("Mode")]
+    public bool AirControl;
+
 	[Header("Subobject")]
 	public GameObject SpotLight;
 
@@ -21,47 +24,71 @@ public class PlayerController : MonoBehaviour
 	[Header("Player")]
 	public Vector3 FakeVelocity;
 
-	private Rigidbody rigidbody;
+	private Rigidbody rb;
 	private Camera mainCamera;
 	private Vector3 lastPosition;
+    private bool isGrounded = true;
 
 	void Start()
 	{
-		rigidbody = GetComponent<Rigidbody>();
+		rb = GetComponent<Rigidbody>();
 		mainCamera = Camera.main;
 		lastPosition = transform.position;
+        rb.maxAngularVelocity = 100;
 	}
 
 	void Update()
     {
-		// Fake velocity
-		FakeVelocity = (transform.position - lastPosition) * Time.deltaTime;
+        isGrounded = FloorCheck();
+
+        // Fake velocity
+        FakeVelocity = (transform.position - lastPosition) * Time.deltaTime;
 		lastPosition = transform.position;
 
-		// Buttons to ball control
+		
+        
+        
+        // Buttons to ball control
+        // MOVE LEFT
 		if (Input.GetKey(KeyCode.A)) {
-			rigidbody.AddForceAtPosition(Vector3.left * ForceMultiplier, Vector3.up * ForceOffset);
-			rigidbody.AddTorque(Vector3.forward * 100.0f * ForceMultiplier, ForceMode.Impulse);
-		}
+            if (isGrounded)
+                rb.AddForceAtPosition(Vector3.left * ForceMultiplier, Vector3.up * ForceOffset);
+            else
+                if (AirControl)
+                    rb.AddForceAtPosition(Vector3.left * ForceMultiplier, Vector3.up * ForceOffset);
+        }
 
-		if (Input.GetKey(KeyCode.D)) {
-			rigidbody.AddForceAtPosition(Vector3.right * ForceMultiplier, Vector3.up * ForceOffset);
-			rigidbody.AddTorque(Vector3.back * 100.0f * ForceMultiplier, ForceMode.Impulse);
-		}
+        // MOVE RIGHT
+        if (Input.GetKey(KeyCode.D)) {
+            if (isGrounded)
+                rb.AddForceAtPosition(Vector3.right * ForceMultiplier, Vector3.up * ForceOffset);
+            else
+                if (AirControl)
+                rb.AddForceAtPosition(Vector3.right * ForceMultiplier, Vector3.up * ForceOffset);
+        }
 
-		FloorCheck();
-		if (FloorCheck() && Input.GetKeyDown(KeyCode.Space)) {
-			rigidbody.AddForce(Vector3.up * JumpForce, ForceMode.Impulse);
+        // JUMP
+        if (isGrounded && Input.GetKeyDown(KeyCode.Space)) {
+			rb.AddForce(Vector3.up * JumpForce, ForceMode.Impulse);
 		}
-
-		// Mouse Position to SpotLight Direction
+        
+		// SPOTLIGHT CONTROL
 		Vector3 diff = Camera.main.ScreenToWorldPoint(Input.mousePosition) - transform.position;
 		diff.z = 0;
 		diff.Normalize();
-
 		Quaternion quat = Quaternion.LookRotation(diff, Vector3.up);
 		SpotLight.transform.rotation = quat;
 	}
+
+
+
+
+
+
+
+
+
+
 
 	void LateUpdate()
 	{
@@ -82,7 +109,7 @@ public class PlayerController : MonoBehaviour
 
 		bool hitLeft = Physics.Linecast(transform.position, transform.position + Vector3.down * FloorCheckThreshold + Vector3.left * FloorCheckSeparation);
 		bool hitRight = Physics.Linecast(transform.position, transform.position + Vector3.down * FloorCheckThreshold + Vector3.right * FloorCheckSeparation);
-		if ((hitLeft || hitRight) && Mathf.Abs(rigidbody.velocity.y) < FloorCheckMinSpeed)
+		if ((hitLeft || hitRight) && Mathf.Abs(rb.velocity.y) < FloorCheckMinSpeed)
 			return true;
 		else
 			return false;
