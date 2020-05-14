@@ -314,6 +314,21 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 4675692084929590531, guid: e365ce4ca988c4d439563986878625d2,
+        type: 3}
+      propertyPath: AirControl
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4675692084929590531, guid: e365ce4ca988c4d439563986878625d2,
+        type: 3}
+      propertyPath: ForceOffset
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4675692084929590531, guid: e365ce4ca988c4d439563986878625d2,
+        type: 3}
+      propertyPath: BallMaxRPM
+      value: 20
+      objectReference: {fileID: 0}
     - target: {fileID: 4675692084929590536, guid: e365ce4ca988c4d439563986878625d2,
         type: 3}
       propertyPath: m_LocalPosition.x

@@ -49,9 +49,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 716c06658137b674eaa36d92e4ef8b26, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  AirControl: 0
   SpotLight: {fileID: 4675692084957007565}
+  BallMaxRPM: 20
   ForceMultiplier: 5
-  TorqueMultiplier: 1
   ForceOffset: 0
   LerpSpeed: 8
   JumpForce: 12

@@ -11,7 +11,8 @@ public class PlayerController : MonoBehaviour
 	[Header("Subobject")]
 	public GameObject SpotLight;
 
-	[Header("Config")]
+    [Header("Config")]
+    public float BallMaxRPM = 7;
 	public float ForceMultiplier;
 	public float ForceOffset;
 	public float LerpSpeed;
@@ -34,7 +35,7 @@ public class PlayerController : MonoBehaviour
 		rb = GetComponent<Rigidbody>();
 		mainCamera = Camera.main;
 		lastPosition = transform.position;
-        rb.maxAngularVelocity = 100;
+        rb.maxAngularVelocity = BallMaxRPM;
 	}
 
 	void Update()
@@ -52,19 +53,19 @@ public class PlayerController : MonoBehaviour
         // MOVE LEFT
 		if (Input.GetKey(KeyCode.A)) {
             if (isGrounded)
-                rb.AddForceAtPosition(Vector3.left * ForceMultiplier, Vector3.up * ForceOffset);
+                rb.AddForceAtPosition(Vector3.left * ForceMultiplier, transform.position + Vector3.up * ForceOffset);
             else
                 if (AirControl)
-                    rb.AddForceAtPosition(Vector3.left * ForceMultiplier, Vector3.up * ForceOffset);
+                    rb.AddForceAtPosition(Vector3.left * ForceMultiplier, transform.position + Vector3.up * ForceOffset);
         }
 
         // MOVE RIGHT
         if (Input.GetKey(KeyCode.D)) {
             if (isGrounded)
-                rb.AddForceAtPosition(Vector3.right * ForceMultiplier, Vector3.up * ForceOffset);
+                rb.AddForceAtPosition(Vector3.right * ForceMultiplier, transform.position + Vector3.up * ForceOffset);
             else
                 if (AirControl)
-                rb.AddForceAtPosition(Vector3.right * ForceMultiplier, Vector3.up * ForceOffset);
+                rb.AddForceAtPosition(Vector3.right * ForceMultiplier, transform.position + Vector3.up * ForceOffset);
         }
 
         // JUMP
