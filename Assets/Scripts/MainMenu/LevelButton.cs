@@ -8,10 +8,10 @@ using System;
 public class LevelButton : MonoBehaviour {
 	public int Level;
 	public bool ForceUnlock;
-	public string LevelType;
+    public MainMenu.LevelType LevelType;
 
 	void Start() {
-		string levelData = PlayerPrefs.GetString("Levels/" + LevelType + "-" + Level, "");
+		string levelData = PlayerPrefs.GetString("Levels/" + LevelType.ToString() + "-" + Level, "");
 		if (levelData.Equals("")) {
 			if (ForceUnlock)
 				InitializeButton(Level, 0, false);

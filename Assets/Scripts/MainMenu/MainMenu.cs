@@ -12,9 +12,6 @@ public class MainMenu : MonoBehaviour {
         Hard
 	}
 
-	private Animator anim;
-	public static bool isSplashDirty;
-
 	
 
 

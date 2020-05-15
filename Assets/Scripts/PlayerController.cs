@@ -7,7 +7,9 @@ public class PlayerController : MonoBehaviour
 {
     [Header("Mode")]
     public bool AirControl;
+    public bool DisableJump;
     public bool DisableMovement;
+    
 
 	[Header("Subobject")]
 	public GameObject SpotLight;
@@ -82,7 +84,7 @@ public class PlayerController : MonoBehaviour
         }
 
         // JUMP
-        if (isGrounded && Input.GetKeyDown(KeyCode.Space)) {
+        if (!DisableJump && isGrounded && Input.GetKeyDown(KeyCode.Space)) {
 			rb.AddForce(Vector3.up * JumpForce, ForceMode.Impulse);
 		}
 	}
