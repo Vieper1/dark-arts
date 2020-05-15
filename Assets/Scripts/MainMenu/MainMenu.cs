@@ -6,10 +6,7 @@ using UnityEngine.Advertisements;
 public class MainMenu : MonoBehaviour {
 
 	public enum LevelType {
-		Tutorial,
-		Easy,
-		Medium,
-        Hard
+        Main
 	}
 
 	

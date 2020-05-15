@@ -8,7 +8,11 @@ using System;
 public class LevelButton : MonoBehaviour {
 	public int Level;
 	public bool ForceUnlock;
-    public MainMenu.LevelType LevelType;
+    public string LevelType;
+    public bool OverrideContentColor;
+    public Color OverrideColor;
+
+    private Color myColor;
 
 	void Start() {
 		string levelData = PlayerPrefs.GetString("Levels/" + LevelType.ToString() + "-" + Level, "");
@@ -19,6 +23,8 @@ public class LevelButton : MonoBehaviour {
 				InitializeButton(Level, 0, true);
 			return;
 		}
+
+        
 
 
 		bool isUnlocked = levelData.Split(',')[0].Equals("true") ? true : false;
@@ -44,26 +50,27 @@ public class LevelButton : MonoBehaviour {
 			GetComponent<Button>().interactable = false;
 		}
 
-		// Color Init
-		Color onColor = GetColorByLevelType((int)LevelsList.LevelType);
+        // Color Init
+        myColor = GetComponent<Image>().color;
+        Color onColor = OverrideContentColor ? OverrideColor : myColor;
 		Color offColor = new Color();
 		ColorUtility.TryParseHtmlString("#90A4AE40", out offColor);
 
 
 		// Components to show
-		onColor = GetComponent<Image>().color;
-		LevelsList.LevelTypeColor = onColor;
 		if (isLocked) {
 			transform.Find("Number/Text").gameObject.SetActive(false);
 			transform.Find("Number/Lock").gameObject.SetActive(true);
-			Color lockedColor; ColorUtility.TryParseHtmlString(BondsLibrary.MDB_LIGHT_GREY, out lockedColor); GetComponent<Image>().color = lockedColor; // Set button color to grey
+			Color lockedColor;
+            ColorUtility.TryParseHtmlString(BondsLibrary.MDB_LIGHT_GREY, out lockedColor);
+            GetComponent<Image>().color = lockedColor; // Set button color to grey
 		} else {
 			transform.Find("Number/Text").GetComponent<Text>().text = level.ToString();
 			transform.Find("Number/Text").GetComponent<Text>().color = onColor;
 		}
 
-		
-		// Star pattern
+
+        // Star pattern
 		switch (stars) {
 			case 1:
 				transform.Find("Stars/Star1").GetComponent<Image>().color = onColor;
@@ -89,25 +96,6 @@ public class LevelButton : MonoBehaviour {
 	}
 
 	public void OnCustomButtonPressed() {
-		SceneManager.LoadScene(LevelsList.LevelType + "-" + Level);
-	}
-
-
-	public static Color GetColorByLevelType(int _levelType)
-	{
-		Color color = new Color();
-		switch ((int)LevelsList.LevelType)
-		{
-			case 0:
-				ColorUtility.TryParseHtmlString("#009FB7", out color);
-				break;
-			case 1:
-				ColorUtility.TryParseHtmlString("#FED766", out color);
-				break;
-			case 2:
-				ColorUtility.TryParseHtmlString("#FE4A49", out color);
-				break;
-		}
-		return color;
+		SceneManager.LoadScene(LevelType + "-" + Level);
 	}
 }
