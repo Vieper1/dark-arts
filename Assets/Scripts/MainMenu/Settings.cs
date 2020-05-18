@@ -7,24 +7,24 @@ using UnityEngine.UI;
 public class Settings : MonoBehaviour {
 	
 	void Start () {
-		if (PlayerPrefs.GetInt("MusicEnabled", 1) == 0) {
-			transform.Find("MusicButton/Text").GetComponent<Text>().text = "Music: OFF";
+		if (PlayerPrefs.GetInt("SoundEnabled", 1) == 0) {
+			transform.Find("SoundButton/Text").GetComponent<Text>().text = "Sound: OFF";
 			AudioListener.pause = true;
 		}
 		if (PlayerPrefs.GetInt("FxaaEnabled", 0) == 0) {
-			transform.Find("FxaaButton/Text").GetComponent<Text>().text = "Soft Graphics: OFF";
+			transform.Find("FxaaButton/Text").GetComponent<Text>().text = "Anti-Aliasing: OFF";
 			GameObject.Find("Main Camera").GetComponent<PostProcessLayer>().antialiasingMode = PostProcessLayer.Antialiasing.None;
 		}
 	}
 	
-	public void OnMusicTogglePressed() {
-		if (PlayerPrefs.GetInt("MusicEnabled", 1) == 1) {
-			PlayerPrefs.SetInt("MusicEnabled", 0);
-			transform.Find("MusicButton/Text").GetComponent<Text>().text = "Music: OFF";
+	public void OnSoundTogglePressed() {
+		if (PlayerPrefs.GetInt("SoundEnabled", 1) == 1) {
+			PlayerPrefs.SetInt("SoundEnabled", 0);
+			transform.Find("SoundButton/Text").GetComponent<Text>().text = "Sound: OFF";
 			AudioListener.pause = true;
 		} else {
-			PlayerPrefs.SetInt("MusicEnabled", 1);
-			transform.Find("MusicButton/Text").GetComponent<Text>().text = "Music: ON";
+			PlayerPrefs.SetInt("SoundEnabled", 1);
+			transform.Find("SoundButton/Text").GetComponent<Text>().text = "Sound: ON";
 			AudioListener.pause = false;
 		}
 	}
@@ -32,13 +32,13 @@ public class Settings : MonoBehaviour {
 	public void OnFxaaTogglePressed() {
 		if (PlayerPrefs.GetInt("FxaaEnabled", 1) == 1) {
 			PlayerPrefs.SetInt("FxaaEnabled", 0);
-			transform.Find("FxaaButton/Text").GetComponent<Text>().text = "Soft Graphics: OFF";
+			transform.Find("FxaaButton/Text").GetComponent<Text>().text = "Anti-Aliasing: OFF";
 			GameObject.Find("Main Camera").GetComponent<PostProcessLayer>().antialiasingMode = PostProcessLayer.Antialiasing.None;
 		} else {
 			PlayerPrefs.SetInt("FxaaEnabled", 1);
-			transform.Find("FxaaButton/Text").GetComponent<Text>().text = "Soft Graphics: ON";
-			GameObject.Find("Main Camera").GetComponent<PostProcessLayer>().antialiasingMode = PostProcessLayer.Antialiasing.FastApproximateAntialiasing;
-			GameObject.Find("Main Camera").GetComponent<PostProcessLayer>().fastApproximateAntialiasing.fastMode = true;
-		}
+			transform.Find("FxaaButton/Text").GetComponent<Text>().text = "Anti-Aliasing: ON";
+            GameObject.Find("Main Camera").GetComponent<PostProcessLayer>().antialiasingMode = PostProcessLayer.Antialiasing.SubpixelMorphologicalAntialiasing;
+            GameObject.Find("Main Camera").GetComponent<PostProcessLayer>().subpixelMorphologicalAntialiasing.quality = SubpixelMorphologicalAntialiasing.Quality.High;
+        }
 	}
 }
