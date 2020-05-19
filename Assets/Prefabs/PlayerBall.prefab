@@ -50,11 +50,12 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   AirControl: 0
+  DisableJump: 0
   DisableMovement: 0
   SpotLight: {fileID: 4675692084957007565}
   BallMaxRPM: 20
   ForceMultiplier: 5
-  ForceOffset: 0
+  ForceOffset: 1
   LerpSpeed: 8
   JumpForce: 12
   FloorCheckThreshold: 0.6

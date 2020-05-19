@@ -4,6 +4,9 @@ using UnityEngine.SceneManagement;
 
 public class PickupKey : MonoBehaviour
 {
+    [Header("Config")]
+    public string NextLevelName;
+
 	private float time = 0f;
 	private Vector3 InitialPosition;
 	private float FloatSpeed = 8.0f;
@@ -28,6 +31,6 @@ public class PickupKey : MonoBehaviour
 	private void OnTriggerEnter(Collider other)
 	{
 		string[] sceneNameSplit = SceneManager.GetActiveScene().name.Split('-');
-		SceneManager.LoadScene(sceneNameSplit[0] + "-" + (int.Parse(sceneNameSplit[1]) + 1));
+		SceneManager.LoadScene(NextLevelName.Equals("") ? sceneNameSplit[0] + "-" + (int.Parse(sceneNameSplit[1]) + 1) : NextLevelName);
 	}
 }
