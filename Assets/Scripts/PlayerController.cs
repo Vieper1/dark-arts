@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.PlayerLoop;
+using UnityEngine.SceneManagement;
 
 public class PlayerController : MonoBehaviour
 {
@@ -87,6 +88,13 @@ public class PlayerController : MonoBehaviour
         if (!DisableJump && isGrounded && Input.GetKeyDown(KeyCode.Space)) {
 			rb.AddForce(Vector3.up * JumpForce, ForceMode.Impulse);
 		}
+
+        // ESCAPE
+        if (Input.GetKeyDown(KeyCode.Escape))
+        {
+            if (!SceneManager.GetActiveScene().name.Equals("MainMenu"))
+                SceneManager.LoadSceneAsync("MainMenu");
+        }
 	}
 
 
