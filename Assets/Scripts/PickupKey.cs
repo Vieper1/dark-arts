@@ -31,6 +31,7 @@ public class PickupKey : MonoBehaviour
 	private void OnTriggerEnter(Collider other)
 	{
 		string[] sceneNameSplit = SceneManager.GetActiveScene().name.Split('-');
+        LevelController.WriteLevelData(3, true);
 		SceneManager.LoadScene(NextLevelName.Equals("") ? sceneNameSplit[0] + "-" + (int.Parse(sceneNameSplit[1]) + 1) : NextLevelName);
 	}
 }
